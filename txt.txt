@@ -1,0 +1,33 @@
+GEMS:
+
+FastJson.
+Kaminary
+Scope//HasScope
+
+/////////////
+Paginator
+
+
+
+/////////////
+app/api/v1/accommdations - > accommodations controleer
+module Api
+    module V1
+        class AccommodationsController
+            def index
+                ...
+                ...
+                ...
+                Serivce
+                ...
+                ...
+                ...
+            end
+
+            def show
+
+            end
+
+
+            def
+

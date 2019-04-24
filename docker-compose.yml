@@ -1,0 +1,18 @@
+version: '3.3'
+services:
+  db:
+    image: postgres
+    container_name: PostgreSQL
+    environment:
+      POSTGRES_PASSWORD: Sql12312
+      POSTGRES_USER: Rent_House
+      POSTGRES_DB: Rent_House_Api_development
+    ports:
+      - 5432:5432
+  rediS:
+    image: redis
+    container_name: Redis
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    ports:
+      - 6379:6379

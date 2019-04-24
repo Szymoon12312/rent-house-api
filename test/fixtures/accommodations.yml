@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  type_id: 1
+  location_id: 1
+  description: MyText
+  owner_id: 1
+  price_id: 1
+  available: false
+  squer_meters: 1.5
+
+two:
+  name: MyString
+  type_id: 1
+  location_id: 1
+  description: MyText
+  owner_id: 1
+  price_id: 1
+  available: false
+  squer_meters: 1.5
