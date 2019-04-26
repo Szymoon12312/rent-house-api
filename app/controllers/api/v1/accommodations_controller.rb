@@ -2,8 +2,13 @@ module Api
   module V1
     class AccommodationsController < ApplicationController
 
+      has_scope :available, default: nil, allow_blank: true, only: :index
+      has_scope :furnished, type: :boolean
+      has_scope :by_price, using: %i[min max], type: :hash
+      has_scope :by_city, using: %i[country state city], type: :hash
+
       def index
-        accommodations = Accommodation.page(params[:page])
+        accommodations = apply_scopes(Accommodation).page(params[:page])
         render_success(accommodations, Api::AccommodationSerializer )
       end
 
