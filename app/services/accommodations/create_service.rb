@@ -43,26 +43,3 @@ module Accommodations
     end
   end
 end
-
-# {
-#   "accommodation": {
-#   "name": "Test2",
-#   "square_meters": 12,
-#   "description": "test desc",
-#   "type": {"name": "test"},
-#   "property": {
-#     "kitchen": 2,
-#     "furnished": true
-#   }
-#   },
-#   "location": {
-#     "country": "Poland",
-#     "city": "Rzeszow",
-#     "state": "Podkarpacie",
-#     "street": "3 maja"
-#   },
-#   "price": {
-#     "name": "monthly",
-#     "value": 200
-#   }
-#}
