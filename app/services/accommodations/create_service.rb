@@ -20,15 +20,15 @@ module Accommodations
     attr_reader :params, :user
 
     def accommodation_params
-      params.dig(:accommodation)&.slice(Accommodation.attribute_names)
+      params.dig(:accommodation)&.slice(*Accommodation.attribute_names)
     end
 
     def accommodation_type_params
-      params.dig(:accommodation).dig(:type)&.slice(AccommodationType.attribute_names)
+      params.dig(:accommodation).dig(:type)&.slice(*AccommodationType.attribute_names)
     end
 
     def accommodation_property_params
-      params.dig(:accommodation).dig(:property)&.slice(AccommodationProperty.attribute_names)
+      params.dig(:accommodation).dig(:property)&.slice(*AccommodationProperty.attribute_names)
     end
 
     def create_accommdation!
@@ -39,7 +39,7 @@ module Accommodations
       acc.accommodation_type                    = AccommodationType.new(accommodation_type_params)
       acc.accommodation_property  = AccommodationProperty.new(accommodation_property_params)
 
-      acc.save!
+      acc.save! ? acc : nil
     end
   end
 end

@@ -1,14 +1,10 @@
 module Api
   class AccommodationSerializer < ActiveModel::Serializer
+    attributes :name, :description, :square_meters
 
-    # self.config.adapter = :json
-    # self.config.root = true
-
-    attributes :name, :description, :square_metes
-
-    # belongs_to :user
+    belongs_to :user
 
     has_one :location, serializer: LocationSerializer
-    # has_one :price
+    has_one :price
   end
 end

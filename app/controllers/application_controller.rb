@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::API
 
   rescue_from ActiveRecord::RecordInvalid do |exeption|
-    render_errors exeption.errors
+    render_errors exeption.message
   end
 
   def render_success(data, serializer, options = {})
@@ -11,6 +11,6 @@ class ApplicationController < ActionController::API
   end
 
   def render_errors(json = {}, status: :unprocessable_entity)
-    render json: { errors: json.camelize_keys! }, status: status
+    render json: { errors: json }, status: status
   end
 end

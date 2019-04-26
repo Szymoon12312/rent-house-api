@@ -1,7 +1,7 @@
 class Api::V1::AccommodationsController < ApplicationController
 
   def index
-    data = Accommodation.page params[:page]
+    data = Accommodation.page get_accommodation_params[:page]
     render_success(data, Api::AccommodationSerializer)
   end
 
@@ -17,6 +17,10 @@ class Api::V1::AccommodationsController < ApplicationController
   end
 
   private
+
+  def get_accommodation_params
+    params.require(:meta).permit!
+  end
 
   def accommodation_params
     params.require(:data).permit!

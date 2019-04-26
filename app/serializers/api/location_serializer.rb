@@ -1,5 +1,5 @@
 module Api
   class LocationSerializer < ActiveModel::Serializer
-    attributes :country, :city
+    attributes :country, :state, :city, :street, :longitude, :latitude
   end
 end
