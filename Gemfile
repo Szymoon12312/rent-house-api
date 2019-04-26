@@ -26,6 +26,7 @@ gem 'cancancan'
 gem 'bootsnap', '>= 1.4.1', require: false
 gem 'pry'
 gem 'active_model_serializers', '~> 0.10.9'
+#Pagination gems
 gem 'kaminari'
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
