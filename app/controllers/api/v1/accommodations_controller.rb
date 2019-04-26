@@ -1,18 +1,25 @@
 class Api::V1::AccommodationsController < ApplicationController
+
   def index
     data = Accommodation.page params[:page]
-    render_success data.as_json(:include => [:location,:price])
+    render_success(data, Api::AccommodationSerializer)
   end
 
   def show
-    data = Accommodation.find(accommodation_params[:id])
-    render_success data.as_json(:include => [:location,:price,:accommodation_property])
+    data = Accommodation.find(params[:id])
+    render_success(data, Api::AccommodationSerializer)
+  end
+
+  def create
+    current_user = User.first
+    accommodation = Accommodations::CreateService.call(current_user, accommodation_params)
+    render_success(accommodation, Api::AccommodationSerializer)
   end
 
   private
 
   def accommodation_params
-    params.permit(:id,:page)
+    params.require(:data).permit!
   end
 
 end

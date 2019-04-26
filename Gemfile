@@ -25,10 +25,14 @@ gem 'cancancan'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.1', require: false
 gem 'pry'
-gem 'fast_jsonapi'
+gem 'active_model_serializers', '~> 0.10.9'
 gem 'kaminari'
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
+
+#for Geocodes
+gem 'geocoder'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

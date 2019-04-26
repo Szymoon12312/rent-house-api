@@ -1,9 +1,14 @@
-class AccommodationSerializer
-  include FastJsonapi::ObjectSerializer
-  attributes :name,:description,:square_metes
+module Api
+  class AccommodationSerializer < ActiveModel::Serializer
 
-  belongs_to :user
+    # self.config.adapter = :json
+    # self.config.root = true
 
-  has_one :location
-  has_one :price
+    attributes :name, :description, :square_metes
+
+    # belongs_to :user
+
+    has_one :location, serializer: LocationSerializer
+    # has_one :price
+  end
 end
