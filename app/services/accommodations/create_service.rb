@@ -36,7 +36,7 @@ module Accommodations
       acc.user                    = user #Gona set user from session
       acc.location                = Location.new(params[:location])
       acc.price                   = Price.new(params[:price])
-      acc.accommodation_type                    = AccommodationType.new(accommodation_type_params)
+      acc.accommodation_type      = AccommodationType.new(accommodation_type_params)
       acc.accommodation_property  = AccommodationProperty.new(accommodation_property_params)
 
       acc.save! ? acc : nil

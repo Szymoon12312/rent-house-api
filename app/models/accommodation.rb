@@ -9,5 +9,10 @@ class Accommodation < ApplicationRecord
   validates_associated  :price, :location, :accommodation_type, :accommodation_property
   validates_presence_of :name, :square_meters, :description
 
+  scope :furnished, -> { joins(:accommodation_property).where(accommodation_properties: { furnished: true }) }
+  scope :available, ->(*) { where(available: true) }
+  scope :by_price, -> min, max { joins(:price).where('prices.value >= ? AND prices.value <= ?', min, max)}
+  scope :by_city, -> country, state, city { joins(:location).where('locations.country = ? AND locations.state = ? AND locations.city = ?', country, state, city)}
+
 end
 

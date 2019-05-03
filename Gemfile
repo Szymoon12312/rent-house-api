@@ -28,6 +28,8 @@ gem 'pry'
 gem 'active_model_serializers', '~> 0.10.9'
 #Pagination gems
 gem 'kaminari'
+#Filter gems
+gem 'has_scope'
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
 
