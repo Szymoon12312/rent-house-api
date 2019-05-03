@@ -1,6 +1,7 @@
 module Api
   module V1
     class AccommodationsController < ApplicationController
+      skip_before_action :authorize_request, only: [:index, :show]
 
       has_scope :available, default: nil, allow_blank: true, only: :index
       has_scope :furnished, type: :boolean

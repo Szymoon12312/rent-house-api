@@ -3,6 +3,8 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
+      post 'authentication/authenticate'
+      post 'users/registration', to: 'users#create'
       get 'accommodations/index'
       get 'accommodations/show/:id',  to: 'accommodations#show'
       post 'accommodations/create'
