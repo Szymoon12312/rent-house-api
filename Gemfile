@@ -19,6 +19,8 @@ gem 'puma', '~> 3.11'
 # gem 'bcrypt', '~> 3.1.7'
 
 # Use Active Storage variant
+gem 'devise'
+gem 'jwt'
 # gem 'image_processing', '~> 1.2'
 gem 'rolify'
 gem 'cancancan'
