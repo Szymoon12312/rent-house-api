@@ -6,6 +6,8 @@ class Accommodation < ApplicationRecord
   has_one :accommodation_property, dependent: :destroy
   has_one :accommodation_type, dependent: :destroy
 
+  resourcify
+
   validates_associated  :price, :location, :accommodation_type, :accommodation_property
   validates_presence_of :name, :square_meters, :description
 
