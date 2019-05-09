@@ -6,7 +6,7 @@ class User < ApplicationRecord
   rolify
 
   has_many :user_groups
-  has_many :groups, :through => :user_groups
-  has_many :accommodations
+  has_many :groups, :through => :user_groups, dependent: :destroy
+  has_many :accommodations, dependent: :destroy
 end
 

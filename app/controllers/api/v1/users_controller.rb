@@ -8,6 +8,16 @@ module Api
         render_success(user, Api::UserSerializer)
       end
 
+      def destroy
+        user = User.find(params[:id])
+        if user == current_user
+          user.destroy!
+          render :json, { message: "User Successfuly deleted" }
+        else
+          render_error "Smth went wrong"
+        end
+      end
+
       private
 
       def user_params
