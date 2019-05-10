@@ -21,7 +21,7 @@ module Api
 
     def add_user
       group = Group.find_by!(uuid: params[:uuid])
-      data = Groups::AddUserService.call(group, current_user) if group
+      data = Groups::AddUserService.call(group, current_user)
       render_success(data, Api::GroupSerializer)
     end
 

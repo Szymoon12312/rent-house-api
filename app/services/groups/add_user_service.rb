@@ -6,9 +6,9 @@ module Groups
       @user = user
     end
 
-    def self.call(uuid, user)
+    def self.call(group, user)
       raise ArgumentError if uuid.blank? or user.blank?
-      new(uuid, user).call
+      new(group, user).call
     end
 
     def call
