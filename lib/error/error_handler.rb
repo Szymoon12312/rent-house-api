@@ -9,10 +9,10 @@ module Error
           respond(:standard_error, 500, e.to_s)
         end
         rescue_from CanCan::AccessDenied do |e|
-          respond :AccessDenieted, 422, e.to_s
+          respond(:AccessDenieted, 422, e.to_s)
         end
         rescue_from ActiveRecord::RecordInvalid do |e|
-          respond :unprocessable_entity, 422, e.to_s
+          respond(:unprocessable_entity, 422, e.to_s)
         end
       end
     end
