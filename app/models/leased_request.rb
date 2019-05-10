@@ -8,4 +8,5 @@ class LeasedRequest < ApplicationRecord
   scope :pending,            -> { where(status: 'pending') }
   scope :accepted,           -> { where(status: 'accepted') }
   scope :with_expaired_date, -> { where("created_at <= ? AND status = 'pending'", Time.now - 1.day) }
+  scope :for_user,           -> (current_user) { where(user: current_user) }
 end

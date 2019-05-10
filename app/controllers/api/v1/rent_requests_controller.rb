@@ -1,7 +1,12 @@
 module Api
   module V1
     class RentRequestsController < ApplicationController
-      before_action :set_accommodation
+      before_action :set_accommodation, only: [:create, :update]
+
+      def index
+        request_list = LeasedRequest.for_user(current_user).pending
+        render_success(request_list, Api::RentRequestSerializer)
+      end
 
       def create
         renter   = rent_request_params[:group_id].blank? ? current_user : Group.find(rent_request_params[:group_id])

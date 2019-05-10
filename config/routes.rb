@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       delete 'groups/destroy/:id', to: 'groups#destroy'
       get 'groups/:uuid/invitation', to: 'groups#add_user'
       post 'accommodations/:id/rent_request', to: 'rent_requests#create'
+      get 'accommodations/rent_requests', to: 'rent_requests#index'
       post 'authentication/authenticate'
       post 'users/registration', to: 'users#create'
       get 'accommodations/index'
