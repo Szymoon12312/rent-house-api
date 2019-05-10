@@ -25,7 +25,7 @@ module Api
         render_success(accommodation, Api::AccommodationSerializer)
       end
 
-      def destroy;      end
+      def destroy; end
 
       private
 

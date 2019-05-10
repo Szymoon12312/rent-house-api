@@ -1,7 +1,7 @@
 module Api
   module V1
     class GroupsController < ApplicationController
-    load_and_authorize_resource :only => [:destroy,:update]
+    load_and_authorize_resource :only => [:destroy, :update]
 
     def create
       group = Groups::CreateService.call(current_user, gropu_params)
@@ -10,19 +10,18 @@ module Api
 
     def destroy
       group = Group.find(params[:id])
-      unless group.destroy
-        return render :json, { error: "smth went wrong"}
-      end
+      return render :json, { error: "smth went wrong"} unless group.destroy
+      render :json, status: :ok
     end
 
     def update
       group = Group.find(params[:id])
-      redner_success(group, Api::GroupSerializer) if group.update(gropu_params)
+      redner_success(group, Api::GroupSerializer) if group.update!(gropu_params)
     end
 
     def add_user
-      group = Group.find_by(uuid: params[:uuid])
-      data = Groups::AddUserService.call(group, current_user) if group
+      group = Group.find_by!(uuid: params[:uuid])
+      data = Groups::AddUserService.call(group, current_user)
       render_success(data, Api::GroupSerializer)
     end
 
