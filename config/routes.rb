@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       post 'groups/create'
+      delete 'groups/destroy/:id', to: 'groups#destroy'
+      get 'groups/:uuid/invitation', to: 'groups#add_user'
       post 'authentication/authenticate'
       post 'users/registration', to: 'users#create'
       get 'accommodations/index'

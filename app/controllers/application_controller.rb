@@ -1,11 +1,9 @@
 class ApplicationController < ActionController::API
+  include Error::ErrorHandler
+
   before_action :authorize_request
 
   attr_reader :current_user
-
-  rescue_from ActiveRecord::RecordInvalid do |exeption|
-    render_errors exeption.message
-  end
 
   def render_success(data, serializer, options = {})
     options.camelize_keys!
