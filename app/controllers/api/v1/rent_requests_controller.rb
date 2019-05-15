@@ -1,7 +1,7 @@
 module Api
   module V1
     class RentRequestsController < ApplicationController
-      before_action :set_accommodation, only: [:create, :accept_request, :update]
+      before_action :set_accommodation, only: [:create, :accept_request, :reject_request, :update]
       before_action :set_rent_request,  only: [:reject_request, :accept_request, :cancel_request, :update]
 
       def index
@@ -28,12 +28,13 @@ module Api
       def reject_request
         raise CanCan::AccessDenied unless current_user.has_role?(:owner, accommodation)
         rent_request.update!(status: 'rejected', rejected_at: Time.current)
-        render_success(rent_request, Api::RentRequestSerializer)
+        head :ok
       end
 
       def cancel_request
         raise CanCan::AccessDenied unless cancelation_permited?
         rent_request.update!(status: 'canceled', canceled_at: Time.current)
+        head :ok
       end
 
       private
