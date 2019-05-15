@@ -5,8 +5,9 @@ class ApplicationController < ActionController::API
 
   attr_reader :current_user
 
-  def render_success(data, serializer, options = {})
+  def render_success(data, serializer = {}, options = {})
     options.camelize_keys!
+    return render json: data, meta: options['meta'],  status: :ok if serializer.blank?
     key = data.respond_to?(:read_attribute_for_serialization) ? 'serializer' : 'each_serializer'
     render json: data, "#{key}": serializer, meta: options['meta'], root: :data, status: :ok
   end

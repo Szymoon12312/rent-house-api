@@ -3,7 +3,7 @@ class CreateAccommodations < ActiveRecord::Migration[6.0]
     create_table :accommodations do |t|
       t.string :name
       t.text :description
-      t.boolean :available
+      t.boolean :available, default: true
       t.float :square_metes
       t.references :user, foreign_key: true
 

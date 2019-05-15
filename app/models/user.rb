@@ -8,6 +8,6 @@ class User < ApplicationRecord
   has_many :user_groups
   has_many :groups, through: :user_groups, dependent: :destroy
   has_many :accommodations, dependent: :destroy
-  has_many :accommodations_leaseds
+  has_many :accommodations_leaseds, foreign_key: :renter_id
 end
 

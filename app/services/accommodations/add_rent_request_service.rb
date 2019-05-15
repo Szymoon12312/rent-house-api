@@ -19,13 +19,11 @@ module Accommodations
     attr_accessor :renter, :accommodation
 
     def add_rent_request
-      ActiveRecord::Base.transaction do
-        rent_request               = LeasedRequest.new()
-        rent_request.user          = renter if renter.instance_of?(User)
-        rent_request.group         = renter if renter.instance_of?(Group)
-        rent_request.accommodation = accommodation
-        rent_request.save!
-      end
+      rent_request               = LeasedRequest.new()
+      rent_request.user          = renter if renter.instance_of?(User)
+      rent_request.group         = renter if renter.instance_of?(Group)
+      rent_request.accommodation = accommodation
+      rent_request.save! ? rent_request : nil
     end
   end
 end

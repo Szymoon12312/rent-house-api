@@ -38,7 +38,6 @@ module Accommodations
       acc.price                   = Price.new(params[:price])
       acc.accommodation_type      = AccommodationType.new(accommodation_type_params)
       acc.accommodation_property  = AccommodationProperty.new(accommodation_property_params)
-
       acc.save! ? acc : nil
     end
   end

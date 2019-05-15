@@ -9,7 +9,7 @@ module Error
           respond(:standard_error, 500, e.to_s)
         end
         rescue_from CanCan::AccessDenied do |e|
-          respond(:AccessDenied, 422, e.to_s)
+          respond(:unauthorized, 422, e.to_s)
         end
         rescue_from ActiveRecord::RecordInvalid do |e|
           respond(:unprocessable_entity, 422, e.to_s)

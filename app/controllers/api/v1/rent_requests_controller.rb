@@ -1,8 +1,8 @@
 module Api
   module V1
     class RentRequestsController < ApplicationController
-      before_action :set_accommodation, only: [:create, :update]
-      before_action :set_rent_request,  only: [:reject_request, :cancel_request, :update]
+      before_action :set_accommodation, only: [:create, :accept_request, :update]
+      before_action :set_rent_request,  only: [:reject_request, :accept_request, :cancel_request, :update]
 
       def index
         request_list = LeasedRequest.for_user(current_user).pending
@@ -10,19 +10,19 @@ module Api
       end
 
       def create
-        renter   = rent_request_params[:group_id].blank? ? current_user : Group.find(rent_request_params[:group_id])
+        renter   = set_renter
         rent_req = Accommodations::AddRentRequestService.call(renter, accommodation)
         render_success(rent_req, Api::RentRequestSerializer)
       end
 
       def accept_request
-        binding.pry
-        Accommodations::AceptRentRequestService.call(
-          current_user,
-          accommodation,
-          rent_request,
-          rent_request_params
-        )
+        data = Accommodations::AcceptRentRequestService.call(
+                  current_user,
+                  accommodation,
+                  rent_request,
+                  rent_request_params
+                )
+        render_success(data)
       end
 
       def reject_request
@@ -50,6 +50,12 @@ module Api
 
       def set_rent_request
         @rent_request = LeasedRequest.find(params[:request_id])
+      end
+
+      def set_renter
+        renter_instance = rent_request_params[:group_id].blank? ? current_user : Group.find(rent_request_params[:group_id])
+        raise CanCan::AccessDenied unless renter_instance.instance_of?(Group) && current_user&.has_role?(:admin, renter_instance)
+        renter_instance
       end
 
       def cancelation_permited?

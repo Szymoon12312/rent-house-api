@@ -4,7 +4,7 @@ class LeasedRequest < ApplicationRecord
   belongs_to :accommodation, dependent: :destroy
 
   validates :status, acceptance: { accept: ['rejected', 'accepted', 'pending', 'canceled'] }
-  validates :user_or_group
+  validate  :user_or_group
 
   scope :pending,            -> { where(status: 'pending') }
   scope :accepted,           -> { where(status: 'accepted') }
