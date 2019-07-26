@@ -11,7 +11,7 @@ Rails.application.routes.draw do
           post 'rent_requests/:request_id/accept', to: 'rent_requests#accept_request'
         end
       end
-
+      get 'show_pdf', to: 'accommodations#show_pdf'
       resources :groups
       resources :users, only: [:create, :destroy]
       post 'authentication/authenticate'

@@ -1,7 +1,7 @@
 module Api
   module V1
     class AccommodationsController < ApplicationController
-      skip_before_action :authorize_request, only: [:index, :show]
+      skip_before_action :authorize_request, only: [:index, :show, :show_pdf]
 
       has_scope :available, default: nil, allow_blank: true, only: :index
       has_scope :furnished, type: :boolean
@@ -28,6 +28,13 @@ module Api
       end
 
       def destroy; end
+
+      def show_pdf
+        binding.pry
+        pdf = Gpdfs::Generators::LeaseAgreement.call
+        binding.pry
+        send_data pdf
+      end
 
       private
 
