@@ -6,7 +6,8 @@ module Api
       has_scope :available, default: nil, allow_blank: true, only: :index
       has_scope :furnished, type: :boolean
       has_scope :by_price, using: %i[min max], type: :hash
-      has_scope :by_city, using: %i[country state city], type: :hash
+      has_scope :by_city
+      has_scope :by_user
 
       load_and_authorize_resource :only => [:destroy, :update]
 
@@ -39,7 +40,7 @@ module Api
       private
 
       def accommodation_params
-        params.require(:data).permit!
+        params.permit(:accommodation,:location,:price,images: [])
       end
     end
   end

@@ -38,6 +38,7 @@ gem 'has_scope'
 gem 'prawn', '~> 2.1'
 #for Geocodes
 gem 'geocoder'
+gem 'rack-cors'
 
 
 group :development, :test do

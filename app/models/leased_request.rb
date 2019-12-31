@@ -1,7 +1,7 @@
 class LeasedRequest < ApplicationRecord
   belongs_to :group, optional: true
   belongs_to :user, optional: true
-  belongs_to :accommodation, dependent: :destroy
+  belongs_to :accommodation
 
   validates :status, acceptance: { accept: ['rejected', 'accepted', 'pending', 'canceled'] }
   validate  :user_or_group

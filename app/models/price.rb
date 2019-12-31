@@ -1,5 +1,6 @@
 class Price < ApplicationRecord
   belongs_to :accommodation
+  has_many :accommodation_leaseds, dependent: :destroy
 
   before_create :set_valid_term
 
