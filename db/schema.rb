@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(version: 2019_12_02_102247) do
   create_table "accommodations", force: :cascade do |t|
     t.string "name"
     t.text "description"
-    t.boolean "available"
+    t.boolean "available", default: true
     t.float "square_meters"
     t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
