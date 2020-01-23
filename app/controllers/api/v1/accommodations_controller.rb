@@ -8,7 +8,7 @@ module Api
       has_scope :by_price, using: %i[min max], type: :hash
       has_scope :by_city, using: %i[country state city], type: :hash
 
-      load_and_authorize_resource :only => [:destroy]
+      load_and_authorize_resource :only => [:destroy, :update]
 
       def index
         accommodations = apply_scopes(Accommodation).page(params[:page])
@@ -19,6 +19,8 @@ module Api
         data = Accommodation.find(params[:id])
         render_success(data, Api::AccommodationSerializer)
       end
+
+      def update; end
 
       def create
         accommodation = Accommodations::CreateService.call(current_user, accommodation_params)

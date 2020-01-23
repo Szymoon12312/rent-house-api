@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  group: one
+  user: one
+  accommodation: one
+  rejected_at: 2019-05-10
+  accepted_at: 2019-05-10
+  status: MyString
+
+two:
+  group: two
+  user: two
+  accommodation: two
+  rejected_at: 2019-05-10
+  accepted_at: 2019-05-10
+  status: MyString

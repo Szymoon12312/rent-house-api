@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_10_151023) do
+ActiveRecord::Schema.define(version: 2019_05_10_204302) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,11 +18,11 @@ ActiveRecord::Schema.define(version: 2019_05_10_151023) do
 
   create_table "accommodation_leaseds", force: :cascade do |t|
     t.bigint "accommodation_id"
-    t.bigint "renter_group_id_id"
+    t.bigint "renter_group_id"
     t.date "leased_from"
     t.date "leased_to"
     t.bigint "price_id"
-    t.bigint "renter_id_id"
+    t.bigint "renter_id"
     t.integer "discount"
     t.integer "fee"
     t.integer "leased_price"
@@ -30,8 +30,8 @@ ActiveRecord::Schema.define(version: 2019_05_10_151023) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["accommodation_id"], name: "index_accommodation_leaseds_on_accommodation_id"
     t.index ["price_id"], name: "index_accommodation_leaseds_on_price_id"
-    t.index ["renter_group_id_id"], name: "index_accommodation_leaseds_on_renter_group_id_id"
-    t.index ["renter_id_id"], name: "index_accommodation_leaseds_on_renter_id_id"
+    t.index ["renter_group_id"], name: "index_accommodation_leaseds_on_renter_group_id"
+    t.index ["renter_id"], name: "index_accommodation_leaseds_on_renter_id"
   end
 
   create_table "accommodation_properties", force: :cascade do |t|
@@ -71,6 +71,21 @@ ActiveRecord::Schema.define(version: 2019_05_10_151023) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.uuid "uuid", default: -> { "uuid_generate_v4()" }, null: false
+  end
+
+  create_table "leased_requests", force: :cascade do |t|
+    t.bigint "group_id"
+    t.bigint "user_id"
+    t.bigint "accommodation_id"
+    t.date "rejected_at"
+    t.date "accepted_at"
+    t.string "status", default: "pending"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.date "canceled_at"
+    t.index ["accommodation_id"], name: "index_leased_requests_on_accommodation_id"
+    t.index ["group_id"], name: "index_leased_requests_on_group_id"
+    t.index ["user_id"], name: "index_leased_requests_on_user_id"
   end
 
   create_table "locations", force: :cascade do |t|
@@ -141,12 +156,15 @@ ActiveRecord::Schema.define(version: 2019_05_10_151023) do
   end
 
   add_foreign_key "accommodation_leaseds", "accommodations"
-  add_foreign_key "accommodation_leaseds", "groups", column: "renter_group_id_id"
+  add_foreign_key "accommodation_leaseds", "groups", column: "renter_group_id"
   add_foreign_key "accommodation_leaseds", "prices"
-  add_foreign_key "accommodation_leaseds", "users", column: "renter_id_id"
+  add_foreign_key "accommodation_leaseds", "users", column: "renter_id"
   add_foreign_key "accommodation_properties", "accommodations"
   add_foreign_key "accommodation_types", "accommodations"
   add_foreign_key "accommodations", "users"
+  add_foreign_key "leased_requests", "accommodations"
+  add_foreign_key "leased_requests", "groups"
+  add_foreign_key "leased_requests", "users"
   add_foreign_key "locations", "accommodations"
   add_foreign_key "prices", "accommodations"
 end
