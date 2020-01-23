@@ -34,9 +34,11 @@ gem 'kaminari'
 gem 'has_scope'
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
-
+# PDF gen
+gem 'prawn', '~> 2.1'
 #for Geocodes
 gem 'geocoder'
+gem 'rack-cors'
 
 
 group :development, :test do

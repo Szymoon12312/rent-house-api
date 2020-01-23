@@ -5,7 +5,7 @@ module Api
       before_action :set_rent_request,  only: [:reject_request, :accept_request, :cancel_request, :update]
 
       def index
-        request_list = LeasedRequest.for_user(current_user).pending
+        request_list = LeasedRequest.for_user(current_user).pending_or_accepted
         render_success(request_list, Api::RentRequestSerializer)
       end
 
@@ -55,7 +55,7 @@ module Api
 
       def set_renter
         renter_instance = rent_request_params[:group_id].blank? ? current_user : Group.find(rent_request_params[:group_id])
-        raise CanCan::AccessDenied unless renter_instance.instance_of?(Group) && current_user&.has_role?(:admin, renter_instance)
+        raise CanCan::AccessDenied if renter_instance.instance_of?(Group) && !current_user&.has_role?(:admin, renter_instance)
         renter_instance
       end
 

@@ -3,6 +3,11 @@ module Api
     class UsersController < ApplicationController
       skip_before_action :authorize_request, only: :create
 
+      def show
+        user = User.find(params[:id])
+        render_success(user, Api::UserSerializer)
+      end
+
       def create
         user = User.create!(user_params)
         render_success(user, Api::UserSerializer)
@@ -16,7 +21,7 @@ module Api
       private
 
       def user_params
-        params.require(:user).permit(:email, :password, :password_confirmation, :name, :phone_number)
+        params.require(:user).permit(:email, :password, :password_confirmation, :name, :surname, :phone_number)
       end
     end
   end
